@@ -4,6 +4,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
   };
 
   outputs = { nixpkgs, flake-utils, ... } @inputs:
@@ -13,6 +14,7 @@
           inherit system; 
           overlays = [
             inputs.neovim-nightly-overlay.overlay
+            inputs.neorg-overlay.overlays.default
           ];
         };
         nvimBin = pkg: "${pkg}/bin/nvim";
