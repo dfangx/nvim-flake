@@ -20,6 +20,7 @@
         config = {
           workspaces = {
             journal = "~/neorg";
+            notes = "~/neorg/notes";
           };
         };
       };
