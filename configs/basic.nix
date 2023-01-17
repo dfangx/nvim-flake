@@ -24,6 +24,12 @@
           };
         };
       };
+      keybinds = {
+        config = {
+          default_keybinds = true;
+          neorg_leader = " ";
+        };
+      };
     };
 
     colorschemes = {

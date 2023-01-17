@@ -45,6 +45,19 @@ in
       default = { };
       description = "Dirman setup";
     };
+    keybinds = mkOption {
+      type = types.submodule {
+        options = {
+          config = mkOption {
+            type = types.attrsOf types.anything;
+            default = { };
+            description = "Configuration for keybinds.";
+          };
+        };
+      };
+      default = { };
+      description = "Keybinds setup";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -70,16 +83,15 @@ in
       dirman = optionalString (cfg.dirman.config != { }) ''
         ["core.norg.dirman"] = ${nvim.lua.toLuaObject cfg.dirman},
       '';
+      keybinds = optionalString (cfg.keybinds.config != { }) ''
+        ["core.norg.dirman"] = ${nvim.lua.toLuaObject cfg.keybinds},
+      '';
     in
     ''
       require'neorg'.setup {
         load = {
           ["core.defaults"] = { },
-          ["core.keybinds"] = {
-            config = {
-              default_keybinds = true
-            }
-          },
+          ${keybinds}
           ${concealer}
           ${dirman}
           ${journal}
